@@ -1,5 +1,9 @@
 ## 0.5.1
 
+* Fixed image
+
+## 0.5.1
+
 * Added image
 
 ## 0.5.0

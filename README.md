@@ -1,6 +1,6 @@
 # Figma Squircle
 
-![image](image.png)
+![image](https://github.com/aloisdeniel/figma_squircle/raw/main/image.png)
 
 Flutter implementation of Figma's corner smoothing.
 
