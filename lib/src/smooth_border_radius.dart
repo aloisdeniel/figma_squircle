@@ -283,4 +283,21 @@ class SmoothBorderRadius extends BorderRadius {
         bottomLeft: bottomLeft,
         bottomRight: bottomRight,
       );
+
+  @override
+  String toString() {
+    if (topLeft == topRight &&
+        topLeft == bottomRight &&
+        topLeft == bottomLeft) {
+      final radius = topLeft.toString();
+      return 'SmoothBorderRadius${radius.substring(12)}';
+    }
+
+    return 'SmoothBorderRadius('
+        'topLeft: $topLeft,'
+        'topRight: $topRight,'
+        'bottomLeft: $bottomLeft,'
+        'bottomRight: $bottomRight,'
+        ')';
+  }
 }

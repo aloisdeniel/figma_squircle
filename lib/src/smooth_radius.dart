@@ -36,7 +36,7 @@ class SmoothRadius extends Radius {
     if (other is SmoothRadius) {
       return SmoothRadius(
         cornerRadius: cornerRadius - other.cornerRadius,
-        cornerSmoothing: cornerSmoothing,
+        cornerSmoothing: (cornerSmoothing + other.cornerSmoothing) / 2,
       );
     }
     return SmoothRadius(
@@ -54,7 +54,7 @@ class SmoothRadius extends Radius {
     if (other is SmoothRadius) {
       return SmoothRadius(
         cornerRadius: cornerRadius + other.cornerRadius,
-        cornerSmoothing: cornerSmoothing,
+        cornerSmoothing: (cornerSmoothing + other.cornerSmoothing) / 2,
       );
     }
     return SmoothRadius(
