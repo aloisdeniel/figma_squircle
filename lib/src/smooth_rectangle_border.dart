@@ -10,7 +10,7 @@ enum BorderAlign {
   outside,
 }
 
-class SmoothRectangleBorder extends OutlinedBorder {
+class SmoothRectangleBorder extends BoxBorder {
   const SmoothRectangleBorder({
     BorderSide side = BorderSide.none,
     this.borderRadius = SmoothBorderRadius.zero,
