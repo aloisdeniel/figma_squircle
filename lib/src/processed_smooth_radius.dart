@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:vector_math/vector_math.dart' as vector;
 
 import 'smooth_radius.dart';
@@ -77,7 +78,10 @@ class ProcessedSmoothRadius {
       p: p,
       width: width,
       height: height,
-      radius: radius,
+      radius: SmoothRadius(
+        cornerRadius: cornerRadius,
+        cornerSmoothing: radius.cornerSmoothing,
+      ),
       circularSectionLength: circularSectionLength,
     );
   }
