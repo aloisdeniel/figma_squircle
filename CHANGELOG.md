@@ -1,3 +1,7 @@
+## 0.5.4
+
+* Clamping radius.
+
 ## 0.5.3
 
 * Adding border align.
