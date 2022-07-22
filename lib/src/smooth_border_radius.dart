@@ -177,7 +177,7 @@ class SmoothBorderRadius extends BorderRadius {
 
   /// Returns the difference between two [BorderRadius] objects.
   SmoothBorderRadius operator -(BorderRadius other) {
-    if (other is SmoothRadius)
+    if (other is SmoothBorderRadius)
       return SmoothBorderRadius.only(
         topLeft: (topLeft - other.topLeft) as SmoothRadius,
         topRight: (topRight - other.topRight) as SmoothRadius,
@@ -190,7 +190,7 @@ class SmoothBorderRadius extends BorderRadius {
 
   /// Returns the sum of two [BorderRadius] objects.
   SmoothBorderRadius operator +(BorderRadius other) {
-    if (other is SmoothRadius) {
+    if (other is SmoothBorderRadius) {
       return SmoothBorderRadius.only(
         topLeft: (topLeft + other.topLeft) as SmoothRadius,
         topRight: (topRight + other.topRight) as SmoothRadius,
