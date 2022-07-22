@@ -165,7 +165,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
               return borderRadius -
                   SmoothBorderRadius.all(
                     SmoothRadius(
-                      cornerRadius: side.width,
+                      cornerRadius: side.width / 2,
                       cornerSmoothing: 1.0,
                     ),
                   );
@@ -175,7 +175,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
               return borderRadius +
                   SmoothBorderRadius.all(
                     SmoothRadius(
-                      cornerRadius: side.width,
+                      cornerRadius: side.width / 2,
                       cornerSmoothing: 1.0,
                     ),
                   );
