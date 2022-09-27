@@ -1,3 +1,7 @@
+## 0.5.5
+
+* Fixes an issue with BorderAlign.
+
 ## 0.5.4
 
 * Clamping radius.
