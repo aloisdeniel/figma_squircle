@@ -25,7 +25,16 @@ class SmoothRectangleBorder extends OutlinedBorder {
   final BorderAlign borderAlign;
 
   @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
+  EdgeInsetsGeometry get dimensions {
+    switch (borderAlign) {
+      case BorderAlign.inside:
+        return EdgeInsets.all(side.width);
+      case BorderAlign.center:
+        return EdgeInsets.all(side.width / 2);
+      case BorderAlign.outside:
+        return EdgeInsets.zero;
+    }
+  }
 
   @override
   ShapeBorder scale(double t) {
@@ -102,45 +111,20 @@ class SmoothRectangleBorder extends OutlinedBorder {
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    final outerRect = () {
-      switch (borderAlign) {
-        case BorderAlign.inside:
-          return rect;
-        case BorderAlign.center:
-          return rect.inflate(side.width / 2);
-        case BorderAlign.outside:
-          return rect.inflate(side.width);
-      }
-    }();
-    final radius = () {
-      switch (borderAlign) {
-        case BorderAlign.inside:
-          return borderRadius;
-        case BorderAlign.center:
-          return borderRadius +
-              SmoothBorderRadius.all(
-                SmoothRadius(
-                  cornerRadius: side.width / 2,
-                  cornerSmoothing: 1.0,
-                ),
-              );
-        case BorderAlign.outside:
-          return borderRadius +
-              SmoothBorderRadius.all(
-                SmoothRadius(
-                  cornerRadius: side.width,
-                  cornerSmoothing: 1.0,
-                ),
-              );
-      }
-    }();
+    return _getPath(rect, borderRadius, textDirection: textDirection);
+  }
 
+  Path _getPath(
+    Rect rect,
+    SmoothBorderRadius radius, {
+    TextDirection? textDirection,
+  }) {
     if ([radius.bottomLeft, radius.bottomRight, radius.topLeft, radius.topRight]
         .every((x) => x.cornerSmoothing == 0.0)) {
-      return Path()..addRRect(radius.resolve(textDirection).toRRect(outerRect));
+      return Path()..addRRect(radius.resolve(textDirection).toRRect(rect));
     }
 
-    return radius.toPath(outerRect);
+    return radius.toPath(rect);
   }
 
   @override
@@ -163,14 +147,51 @@ class SmoothRectangleBorder extends OutlinedBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        final outerPath = getOuterPath(
-          rect,
+        // Since the stroke is painted at the center, we need to adjust the rect
+        // according to the [borderAlign].
+        final adjustedRect = () {
+          switch (borderAlign) {
+            case BorderAlign.inside:
+              return rect.deflate(side.width / 2);
+            case BorderAlign.center:
+              return rect;
+            case BorderAlign.outside:
+              return rect.inflate(side.width / 2);
+          }
+        }();
+        final adjustedBorderRadius = () {
+          switch (borderAlign) {
+            case BorderAlign.inside:
+              return borderRadius -
+                  SmoothBorderRadius.all(
+                    SmoothRadius(
+                      cornerRadius: side.width / 2,
+                      cornerSmoothing: 1.0,
+                    ),
+                  );
+            case BorderAlign.center:
+              return borderRadius;
+            case BorderAlign.outside:
+              return borderRadius +
+                  SmoothBorderRadius.all(
+                    SmoothRadius(
+                      cornerRadius: side.width / 2,
+                      cornerSmoothing: 1.0,
+                    ),
+                  );
+          }
+        }();
+
+        final outerPath = _getPath(
+          adjustedRect,
+          adjustedBorderRadius,
           textDirection: textDirection,
         );
 
-        final paint = side.toPaint();
-
-        canvas.drawPath(outerPath, paint);
+        canvas.drawPath(
+          outerPath,
+          side.toPaint(),
+        );
 
         break;
     }
