@@ -207,9 +207,6 @@ class SmoothRectangleBorder extends OutlinedBorder {
   }
 
   @override
-  int get hashCode => hashValues(side, borderRadius, borderAlign);
-
-  @override
   String toString() {
     return '${objectRuntimeType(this, 'SmoothRectangleBorder')}($side, $borderRadius, $borderAlign)';
   }
