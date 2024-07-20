@@ -206,8 +206,8 @@ class SmoothRectangleBorder extends OutlinedBorder {
         other.borderAlign == borderAlign;
   }
 
-  @override
-  int get hashCode => hashValues(side, borderRadius, borderAlign);
+  //@override
+  //int get hashCode => hashValues(side, borderRadius, borderAlign);
 
   @override
   String toString() {
