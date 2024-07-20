@@ -206,9 +206,6 @@ class SmoothRectangleBorder extends OutlinedBorder {
         other.borderAlign == borderAlign;
   }
 
-  //@override
-  //int get hashCode => hashValues(side, borderRadius, borderAlign);
-
   @override
   String toString() {
     return '${objectRuntimeType(this, 'SmoothRectangleBorder')}($side, $borderRadius, $borderAlign)';
