@@ -1,5 +1,4 @@
 import 'package:figma_squircle/figma_squircle.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 padding: EdgeInsets.all(20),
                 decoration: ShapeDecoration(
-                  color: Colors.blue.withOpacity(0.5),
+                  color: Colors.blue.withAlpha(128),
                   shape: SmoothRectangleBorder(
                     side: BorderSide(
                       color: Colors.blue,

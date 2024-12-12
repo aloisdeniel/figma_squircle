@@ -108,14 +108,14 @@ class SmoothBorderRadius extends BorderRadius {
   final SmoothRadius bottomRight;
 
   /// Needed by internals of Flutter framework.
-  Radius get _topLeft => topLeft;
-  Radius get _topRight => topRight;
-  Radius get _bottomLeft => bottomLeft;
-  Radius get _bottomRight => bottomRight;
-  Radius get _topStart => Radius.zero;
-  Radius get _topEnd => Radius.zero;
-  Radius get _bottomStart => Radius.zero;
-  Radius get _bottomEnd => Radius.zero;
+  // Radius get _topLeft => topLeft;
+  // Radius get _topRight => topRight;
+  // Radius get _bottomLeft => bottomLeft;
+  // Radius get _bottomRight => bottomRight;
+  // Radius get _topStart => Radius.zero;
+  // Radius get _topEnd => Radius.zero;
+  // Radius get _bottomStart => Radius.zero;
+  // Radius get _bottomEnd => Radius.zero;
 
   /// Creates a [Path] inside the given [Rect].
   Path toPath(Rect rect) {

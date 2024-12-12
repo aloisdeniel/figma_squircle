@@ -2,8 +2,6 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'smooth_border_radius.dart';
-
 enum BorderAlign {
   inside,
   center,
@@ -207,7 +205,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
   }
 
   @override
-  int get hashCode => hashValues(side, borderRadius, borderAlign);
+  int get hashCode => Object.hash(side, borderRadius, borderAlign);
 
   @override
   String toString() {
