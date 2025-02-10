@@ -5,11 +5,11 @@ import 'smooth_rectangle_border.dart';
 
 class ClipSmoothRect extends StatelessWidget {
   const ClipSmoothRect({
-    Key? key,
     required this.child,
+    super.key,
     this.radius = SmoothBorderRadius.zero,
     this.clipBehavior = Clip.antiAlias,
-  }) : super(key: key);
+  });
 
   final SmoothBorderRadius radius;
   final Clip clipBehavior;
