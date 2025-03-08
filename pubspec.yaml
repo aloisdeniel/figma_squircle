@@ -1,6 +1,6 @@
 name: figma_squircle
 description: Smooth corner radii for Flutter.
-version: 0.6.2
+version: 0.6.3
 homepage: https://github.com/aloisdeniel/figma_squircle
 
 environment:
