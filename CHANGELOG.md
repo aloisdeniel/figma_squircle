@@ -1,3 +1,8 @@
+
+## 0.6.2
+
+* Fix for `useCache` not being copied with `copyWith`.
+
 ## 0.6.1
 
 * Disable caching when lerping.

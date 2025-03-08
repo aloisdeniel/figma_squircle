@@ -92,8 +92,10 @@ class SmoothBorderRadius extends BorderRadius {
     Radius? topRight,
     Radius? bottomLeft,
     Radius? bottomRight,
+    bool? useCache,
   }) {
     return SmoothBorderRadius.only(
+      useCache: useCache ?? this.useCache,
       topLeft: topLeft is SmoothRadius ? topLeft : this.topLeft,
       topRight: topRight is SmoothRadius ? topRight : this.topRight,
       bottomLeft: bottomLeft is SmoothRadius ? bottomLeft : this.bottomLeft,
