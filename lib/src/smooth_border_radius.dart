@@ -7,8 +7,10 @@ import 'smooth_radius.dart';
 class SmoothBorderRadius extends BorderRadius {
   SmoothBorderRadius({
     required double cornerRadius,
+    bool useCache = true,
     double cornerSmoothing = 0,
   }) : this.only(
+          useCache: useCache,
           topLeft: SmoothRadius(
             cornerRadius: cornerRadius,
             cornerSmoothing: cornerSmoothing,
@@ -29,8 +31,11 @@ class SmoothBorderRadius extends BorderRadius {
 
   /// Creates a border radius where all radii are [radius].
 
-  const SmoothBorderRadius.all(SmoothRadius radius)
-      : this.only(
+  const SmoothBorderRadius.all(
+    SmoothRadius radius, {
+    bool useCache = true,
+  }) : this.only(
+          useCache: useCache,
           topLeft: radius,
           topRight: radius,
           bottomLeft: radius,
@@ -42,11 +47,13 @@ class SmoothBorderRadius extends BorderRadius {
   const SmoothBorderRadius.vertical({
     SmoothRadius top = SmoothRadius.zero,
     SmoothRadius bottom = SmoothRadius.zero,
+    bool useCache = true,
   }) : this.only(
           topLeft: top,
           topRight: top,
           bottomLeft: bottom,
           bottomRight: bottom,
+          useCache: useCache,
         );
 
   /// Creates a horizontally symmetrical border radius where the left and right
@@ -54,7 +61,9 @@ class SmoothBorderRadius extends BorderRadius {
   const SmoothBorderRadius.horizontal({
     SmoothRadius left = SmoothRadius.zero,
     SmoothRadius right = SmoothRadius.zero,
+    bool useCache = true,
   }) : this.only(
+          useCache: useCache,
           topLeft: left,
           topRight: right,
           bottomLeft: left,
@@ -68,6 +77,7 @@ class SmoothBorderRadius extends BorderRadius {
     this.topRight = SmoothRadius.zero,
     this.bottomLeft = SmoothRadius.zero,
     this.bottomRight = SmoothRadius.zero,
+    this.useCache = true,
   }) : super.only(
           topLeft: topLeft,
           bottomRight: topRight,
@@ -107,6 +117,9 @@ class SmoothBorderRadius extends BorderRadius {
   /// The bottom-right [SmoothRadius].
   final SmoothRadius bottomRight;
 
+  /// Whether to use the cache when creating the [Path].
+  final bool useCache;
+
   /// Creates a [Path] inside the given [Rect].
   Path toPath(Rect rect) {
     final width = rect.width;
@@ -119,6 +132,7 @@ class SmoothBorderRadius extends BorderRadius {
       topLeft,
       width: width,
       height: height,
+      useCache: useCache,
     );
     final processedBottomLeft = topLeft == bottomLeft
         ? processedTopLeft
@@ -126,6 +140,7 @@ class SmoothBorderRadius extends BorderRadius {
             bottomLeft,
             width: width,
             height: height,
+            useCache: useCache,
           );
     final processedBottomRight = bottomLeft == bottomRight
         ? processedBottomLeft
@@ -133,6 +148,7 @@ class SmoothBorderRadius extends BorderRadius {
             bottomRight,
             width: width,
             height: height,
+            useCache: useCache,
           );
     final processedTopRight = topRight == bottomRight
         ? processedBottomRight
@@ -140,6 +156,7 @@ class SmoothBorderRadius extends BorderRadius {
             topRight,
             width: width,
             height: height,
+            useCache: useCache,
           );
 
     result
@@ -169,6 +186,7 @@ class SmoothBorderRadius extends BorderRadius {
   SmoothBorderRadius operator -(BorderRadius other) {
     if (other is SmoothBorderRadius)
       return SmoothBorderRadius.only(
+        useCache: useCache,
         topLeft: (topLeft - other.topLeft) as SmoothRadius,
         topRight: (topRight - other.topRight) as SmoothRadius,
         bottomLeft: (bottomLeft - other.bottomLeft) as SmoothRadius,
@@ -182,6 +200,7 @@ class SmoothBorderRadius extends BorderRadius {
   SmoothBorderRadius operator +(BorderRadius other) {
     if (other is SmoothBorderRadius) {
       return SmoothBorderRadius.only(
+        useCache: useCache,
         topLeft: (topLeft + other.topLeft) as SmoothRadius,
         topRight: (topRight + other.topRight) as SmoothRadius,
         bottomLeft: (bottomLeft + other.bottomLeft) as SmoothRadius,
@@ -197,6 +216,7 @@ class SmoothBorderRadius extends BorderRadius {
   @override
   SmoothBorderRadius operator -() {
     return SmoothBorderRadius.only(
+      useCache: useCache,
       topLeft: (-topLeft) as SmoothRadius,
       topRight: (-topRight) as SmoothRadius,
       bottomLeft: (-bottomLeft) as SmoothRadius,
@@ -208,6 +228,7 @@ class SmoothBorderRadius extends BorderRadius {
   @override
   SmoothBorderRadius operator *(double other) {
     return SmoothBorderRadius.only(
+      useCache: useCache,
       topLeft: topLeft * other,
       topRight: topRight * other,
       bottomLeft: bottomLeft * other,
@@ -219,6 +240,7 @@ class SmoothBorderRadius extends BorderRadius {
   @override
   SmoothBorderRadius operator /(double other) {
     return SmoothBorderRadius.only(
+      useCache: useCache,
       topLeft: topLeft / other,
       topRight: topRight / other,
       bottomLeft: bottomLeft / other,
@@ -230,6 +252,7 @@ class SmoothBorderRadius extends BorderRadius {
   @override
   SmoothBorderRadius operator ~/(double other) {
     return SmoothBorderRadius.only(
+      useCache: useCache,
       topLeft: topLeft ~/ other,
       topRight: topRight ~/ other,
       bottomLeft: bottomLeft ~/ other,
@@ -241,6 +264,7 @@ class SmoothBorderRadius extends BorderRadius {
   @override
   SmoothBorderRadius operator %(double other) {
     return SmoothBorderRadius.only(
+      useCache: useCache,
       topLeft: topLeft % other,
       topRight: topRight % other,
       bottomLeft: bottomLeft % other,
@@ -259,6 +283,7 @@ class SmoothBorderRadius extends BorderRadius {
     if (a == null) return b! * t;
     if (b == null) return a * (1.0 - t);
     return SmoothBorderRadius.only(
+      useCache: false, // Caching is disabled while lerping
       topLeft: SmoothRadius.lerp(a.topLeft, b.topLeft, t)!,
       topRight: SmoothRadius.lerp(a.topRight, b.topRight, t)!,
       bottomLeft: SmoothRadius.lerp(a.bottomLeft, b.bottomLeft, t)!,

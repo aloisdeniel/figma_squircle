@@ -1,7 +1,11 @@
+## 0.6.1
+
+* Disable caching when lerping.
+
 ## 0.6.0
 
 * Upgraded dependencies.
-* Adding caching of processed radii.
+* Adding cache of processed radii.
 
 ## 0.5.5
 
