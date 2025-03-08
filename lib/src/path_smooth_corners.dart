@@ -87,7 +87,9 @@ extension PathSmoothCornersExtensions on Path {
           height,
         );
     } else {
-      this..lineTo(width, height)..lineTo(width / 2, height);
+      this
+        ..lineTo(width, height)
+        ..lineTo(width / 2, height);
     }
   }
 
@@ -129,7 +131,9 @@ extension PathSmoothCornersExtensions on Path {
           math.max(height / 2, height - p),
         );
     } else {
-      this..lineTo(0, height)..lineTo(0, height / 2);
+      this
+        ..lineTo(0, height)
+        ..lineTo(0, height / 2);
     }
   }
 

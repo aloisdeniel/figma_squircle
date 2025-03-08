@@ -1,4 +1,4 @@
-import 'package:figma_squircle/figma_squircle.dart';
+import 'package:figma_squircle/src/smooth_radius.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +12,10 @@ enum BorderAlign {
 
 class SmoothRectangleBorder extends OutlinedBorder {
   const SmoothRectangleBorder({
-    BorderSide side = BorderSide.none,
+    super.side = BorderSide.none,
     this.borderRadius = SmoothBorderRadius.zero,
     this.borderAlign = BorderAlign.inside,
-  }) : super(side: side);
+  });
 
   /// The radius for each corner.
   ///
@@ -207,7 +207,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
   }
 
   @override
-  int get hashCode => hashValues(side, borderRadius, borderAlign);
+  int get hashCode => Object.hash(side, borderRadius, borderAlign);
 
   @override
   String toString() {

@@ -1,5 +1,4 @@
 import 'package:figma_squircle/figma_squircle.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 padding: EdgeInsets.all(20),
                 decoration: ShapeDecoration(
-                  color: Colors.blue.withOpacity(0.5),
+                  color: Colors.blue.withValues(alpha: 0.5),
                   shape: SmoothRectangleBorder(
                     side: BorderSide(
                       color: Colors.blue,
@@ -493,7 +492,7 @@ class VariationsExample extends StatelessWidget {
     return Container(
       height: 100,
       width: 100,
-      color: Colors.blue.withOpacity(0.25),
+      color: Colors.blue.withValues(alpha: 0.25),
     );
   }
 
@@ -502,7 +501,7 @@ class VariationsExample extends StatelessWidget {
       height: 100,
       width: 100,
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.75),
+        color: Colors.red.withValues(alpha: 0.75),
         borderRadius: radius,
       ),
     );
@@ -513,7 +512,7 @@ class VariationsExample extends StatelessWidget {
       height: 100,
       width: 100,
       decoration: ShapeDecoration(
-        color: Colors.red.withOpacity(0.75),
+        color: Colors.red.withValues(alpha: 0.75),
         shape: ContinuousRectangleBorder(
           borderRadius: radius,
         ),
@@ -526,7 +525,7 @@ class VariationsExample extends StatelessWidget {
       height: 100,
       width: 100,
       decoration: ShapeDecoration(
-        color: Colors.red.withOpacity(0.75),
+        color: Colors.red.withValues(alpha: 0.75),
         shape: SmoothRectangleBorder(
           borderRadius: radius,
         ),

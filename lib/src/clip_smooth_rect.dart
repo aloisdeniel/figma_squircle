@@ -1,4 +1,4 @@
-import 'package:figma_squircle/figma_squircle.dart';
+import 'package:figma_squircle/src/smooth_border_radius.dart';
 import 'package:flutter/widgets.dart';
 
 import 'smooth_rectangle_border.dart';

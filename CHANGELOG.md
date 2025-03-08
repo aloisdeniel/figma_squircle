@@ -1,3 +1,8 @@
+## 0.6.0
+
+* Upgraded dependencies.
+* Adding caching of processed radii.
+
 ## 0.5.5
 
 * Fixes an issue with BorderAlign.

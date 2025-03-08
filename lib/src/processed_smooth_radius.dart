@@ -1,7 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:vector_math/vector_math.dart' as vector;
-
 import 'smooth_radius.dart';
 
 // The article from figma's blog
@@ -22,11 +20,26 @@ class ProcessedSmoothRadius {
     required this.circularSectionLength,
   });
 
+  /// Since the operations are expensive, and the radius values pretty recurrent, we cache the results.
+  static final Map<(SmoothRadius, double, double), ProcessedSmoothRadius>
+      _cache = {};
+
+  /// Creates a [ProcessedSmoothRadius] from a [SmoothRadius].
+  ///
+  /// If [useCache] is true, the result will be cached.
   factory ProcessedSmoothRadius(
     SmoothRadius radius, {
     required double width,
     required double height,
+    bool useCache = true,
   }) {
+    if (useCache) {
+      final cached = _cache[(radius, width, height)];
+      if (cached != null) {
+        return cached;
+      }
+    }
+
     final cornerSmoothing = radius.cornerSmoothing;
     var cornerRadius = radius.cornerRadius;
 
@@ -57,20 +70,19 @@ class ProcessedSmoothRadius {
 
     // This was called `h_longest` in the original code
     // In the article this is the distance between 2 control points: P3 and P4
-    final p3ToP4Distance =
-        cornerRadius * math.tan(vector.radians(angleTheta / 2));
+    final p3ToP4Distance = cornerRadius * math.tan(_radians(angleTheta / 2));
 
     // This was called `l` in the original code
     final circularSectionLength =
-        math.sin(vector.radians(angleBeta / 2)) * cornerRadius * math.sqrt(2);
+        math.sin(_radians(angleBeta / 2)) * cornerRadius * math.sqrt(2);
 
     // a, b, c and d are from 11.1 in the article
-    final c = p3ToP4Distance * math.cos(vector.radians(angleAlpha));
-    final d = c * math.tan(vector.radians(angleAlpha));
+    final c = p3ToP4Distance * math.cos(_radians(angleAlpha));
+    final d = c * math.tan(_radians(angleAlpha));
     final b = (p - circularSectionLength - c - d) / 3;
     final a = 2 * b;
 
-    return ProcessedSmoothRadius._(
+    final result = ProcessedSmoothRadius._(
       a: a,
       b: b,
       c: c,
@@ -84,6 +96,10 @@ class ProcessedSmoothRadius {
       ),
       circularSectionLength: circularSectionLength,
     );
+    if (useCache) {
+      _cache[(radius, width, height)] = result;
+    }
+    return result;
   }
 
   final SmoothRadius radius;
@@ -128,3 +144,9 @@ class ProcessedSmoothRadius {
         ')';
   }
 }
+
+/// Convert [degrees] to radians.
+double _radians(double degrees) => degrees * _degrees2Radians;
+
+/// Constant factor to convert and angle from degrees to radians.
+const double _degrees2Radians = math.pi / 180.0;
