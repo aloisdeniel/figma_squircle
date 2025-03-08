@@ -282,8 +282,8 @@ class SmoothBorderRadius extends BorderRadius {
   static SmoothBorderRadius? lerp(
       SmoothBorderRadius? a, SmoothBorderRadius? b, double t) {
     if (a == null && b == null) return null;
-    if (a == null) return b! * t;
-    if (b == null) return a * (1.0 - t);
+    if (a == null) return b!.copyWith(useCache: false) * t;
+    if (b == null) return a.copyWith(useCache: false) * (1.0 - t);
     return SmoothBorderRadius.only(
       useCache: false, // Caching is disabled while lerping
       topLeft: SmoothRadius.lerp(a.topLeft, b.topLeft, t)!,

@@ -1,3 +1,6 @@
+## 0.6.3
+
+* Fix for disabled caching while lerping.
 
 ## 0.6.2
 
