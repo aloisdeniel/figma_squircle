@@ -13,7 +13,7 @@ class ClipSmoothRect extends StatelessWidget {
 
   final SmoothBorderRadius radius;
   final Clip clipBehavior;
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
